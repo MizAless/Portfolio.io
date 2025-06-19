@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Алексей Пивоваров — Unity разработчик</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #0d0d0d;
+    color: #fff;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+  }
+
+  /* Hero Section */
+  .hero {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+  }
+
+  .hero-photo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 60%;
+    object-fit: cover;
+    object-position: center;
+    mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, rgba(13,13,13,0) 0%, rgba(13,13,13,0.7) 50%, rgba(13,13,13,0.9) 100%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding: 2rem;
+    background-color: rgba(26, 26, 26, 0.7);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    border-right: 4px solid #ff9900;
+    margin-left: auto;
+  }
+
+  h1, h3, h4 {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  h1 {
+    font-size: 3rem;
+    color: #ff9900;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    color: #00ccff;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  h4 {
+    font-size: 2.5rem;
+    color: #00ccff;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0,204,255,0.3);
+  }
+
+  .title {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  .title span {
+    color: #ff9900;
+    font-weight: 500;
+  }
+
+  .project-subtitle {
+    color: #aaa;
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+
+  .skills-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .skill-item::before {
+    content: '▹';
+    color: #ff9900;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .experience {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #333;
+  }
+
+  .experience-item {
+    margin-bottom: 1rem;
+  }
+
+  .experience-title {
+    font-weight: 500;
+    color: #ff9900;
+  }
+
+  .experience-period {
+    color: #aaa;
+    font-size: 0.9rem;
+  }
+
+  /* Portfolio Section */
+  .portfolio-section {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+    background: linear-gradient(to bottom, #0a0a0a 0%, #0d0d0d 100%);
+  }
+
+  .project {
+    margin-bottom: 6rem;
+    padding: 3rem;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.05);
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  .project:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+  }
+
+  .project-header {
+    margin-bottom: 3rem;
+    text-align: center;
+    padding: 0 2rem;
+  }
+
+  .project-description {
+    text-align: center;
+    max-width: 900px;
+    margin: 3rem auto;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #ddd;
+  }
+
+  .main-screenshot {
+    position: relative;
+    margin: 3rem auto;
+    max-width: 1200px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .main-screenshot img, 
+  .main-screenshot video {
+    width: 100%;
+    display: block;
+  }
+
+  .project-status {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 0, 0, 0.8);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  /* GIF Features */
+  .gif-feature {
+    display: flex;
+    align-items: center;
+    margin: 4rem 0;
+  }
+
+  .gif-container {
+    flex: 0 0 65%;
+    position: relative;
+    min-width: 700px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .gif-container:hover {
+    transform: scale(1.02);
+  }
+
+  .gif-container img {
+    width: 100%;
+    display: block;
+  }
+
+  .gif-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,204,255,0.2);
+    backdrop-filter: blur(5px);
+    padding: 12px;
+    text-align: center;
+    font-size: 1rem;
+    color: #fff;
+  }
+
+  .feature-description {
+    flex: 1;
+    padding: 2.5rem;
+    background: rgba(30, 30, 30, 0.6);
+    border-radius: 12px;
+    margin: 0 2.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .feature-description h5 {
+    color: #00ccff;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+
+  .feature-description ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .feature-description li {
+    position: relative;
+    padding-left: 1.8rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+    font-size: 1.1rem;
+  }
+
+  .feature-description li::before {
+    content: '▹';
+    color: #00ccff;
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+  }
+
+  /* Alternating Layout */
+  .gif-container.left {
+    order: 1;
+  }
+
+  .feature-description.right {
+    order: 2;
+  }
+
+  .feature-description.left {
+    order: 1;
+  }
+
+  .gif-container.right {
+    order: 2;
+  }
+
+  /* Sliders and galleries */
+  .slider-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 3rem auto;
+    overflow: hidden;
+  }
+
+  .slider-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .slide {
+    min-width: 100%;
+    padding: 0 10px;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  }
+
+  .screenshots-gallery {
+    display: flex;
+    gap: 30px;
+    margin: 3rem auto;
+    max-width: 1200px;
+  }
+
+  .screenshots-gallery img {
+    flex: 1;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  }
+
+  .video-container {
+    margin: 3rem auto;
+    max-width: 1000px;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    height: 560px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: none;
+  }
+
+  /* Feature containers */
+  .feature-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 3rem 0;
+  }
+
+  .main-video, .secondary-video {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .main-video {
+    flex: 2;
+    min-width: 0;
+  }
+
+  .secondary-video {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  /* GIF pairs */
+  .gif-pair {
+    display: flex;
+    gap: 30px;
+    margin: 3rem 0;
+  }
+
+  /* Animations */
+  .reveal {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.8s ease;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .reveal-right {
+    transform: translateX(100px);
+  }
+
+  .reveal-right.active {
+    transform: translateX(0);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Scrollbar styles */
+  .screenshots-gallery::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .screenshots-gallery::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+  }
+  
+  .screenshots-gallery::-webkit-scrollbar-thumb {
+    background: rgba(255,50,50,0.5);
+    border-radius: 10px;
+  }
+  
+  .screenshots-gallery::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,50,50,0.7);
+  }
+
+  /* Responsive styles */
+  @media (max-width: 1200px) {
+    .portfolio-section {
+      padding: 2rem;
+    }
+    
+    .gif-feature, .feature-container {
+      flex-direction: column;
+    }
+    
+    .gif-container {
+      flex: 1 1 100%;
+      min-width: auto;
+      max-width: 100%;
+      order: 1 !important;
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature-description {
+      order: 2 !important;
+      text-align: left !important;
+      margin: 0;
+    }
+
+    .slide img, .video-container iframe {
+      height: 450px;
+    }
+
+    .main-video, .secondary-video {
+      width: 100% !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 1rem;
+    }
+    
+    .hero-content {
+      padding: 1.5rem;
+    }
+    
+    h1 {
+      font-size: 2.2rem;
+    }
+    
+    .title {
+      font-size: 1.4rem;
+    }
+    
+    .project {
+      padding: 1.5rem;
+    }
+    
+    h4 {
+      font-size: 1.8rem;
+    }
+    
+    .project-subtitle, .feature-description li {
+      font-size: 1rem;
+    }
+
+    .slide img, .video-container iframe {
+      height: 300px;
+    }
+
+    .project-description {
+      font-size: 1rem;
+    }
+
+    .screenshots-gallery img {
+      height: 200px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="hero">
+    <img src="Photo.png" alt="Алексей Пивоваров" class="hero-photo">
+    <div class="hero-content">
+      <h1>Алексей Пивоваров</h1>
+      <p class="title">Unity <span>разработчик</span></p>
+      
+      <p>Более 5 лет изучаю программирование, 3 года разрабатываю игры на Unity. Имею большой опыт коммерческой разработки и преподавания.</p>
+      
+      <div class="skills-list">
+        <div class="skill-item">Unity Engine</div>
+        <div class="skill-item">C# & ООП</div>
+        <div class="skill-item">Git & Version Control</div>
+        <div class="skill-item">SOLID принципы</div>
+        <div class="skill-item">Zenject (DI)</div>
+        <div class="skill-item">Agile/Scrum</div>
+      </div>
+      
+      <div class="experience">
+        <div class="experience-item">
+          <div class="experience-title">Unity Developer</div>
+          <div class="experience-period">2021 - настоящее время</div>
+        </div>
+        <div class="experience-item">
+          <div class="experience-title">Преподаватель Unity</div>
+          <div class="experience-period">2020 - 2021</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<section class="reveal portfolio-section">
+  <h3>Портфолио:</h3>
+
+  <div class="project mmorpg-project">
+    <div class="project-header">
+      <h4>Action-MMORPG</h4>
+      <p class="project-subtitle">Профессиональный проект (DOXGames)</p>
+    </div>
+    
+    <div class="main-screenshot">
+      <img src="https://github.com/user-attachments/assets/3535c3cd-a80e-469e-8d79-b185430407e8" alt="MMORPG скриншот">
+      <div class="project-status">Проект заморожен</div>
+    </div>
+    
+    <p class="project-description">Сложная система инвентаря, мувмент и боёвка, крафт, добыча ресурсов, профессии и многое другое.</p>
+    
+    <!-- Weapon GIF (слева) -->
+    <div class="gif-feature">
+      <div class="gif-container left">
+        <img src="https://github.com/MizAless/TestGif/raw/main/weapon.gif" alt="Система оружия">
+        <div class="gif-caption">Интерактивная демонстрация</div>
+      </div>
+      <div class="feature-description right">
+        <h5>Комплексная боевая система</h5>
+        <ul>
+          <li>Различные подбираемые, активируемые и экипируемые предметы</li>
+          <li>Боёвка с задерживаемой атакой разной дальности</li>
+          <li>Несколько уникальных скиллов</li>
+          <li>Анимации, зависящие от направления движения и взгляда</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Equipment GIF (справа) -->
+    <div class="gif-feature">
+      <div class="feature-description left">
+        <h5>Динамическая система экипировки</h5>
+        <ul>
+          <li>Визуальное отображение всей экипировки на персонаже</li>
+          <li>Реалистичная смена внешнего вида</li>
+          <li>Слоёная система брони</li>
+          <li>Оптимизированная система рендеринга</li>
+        </ul>
+      </div>
+      <div class="gif-container right">
+        <img src="https://github.com/MizAless/TestGif/raw/main/equipment.gif" alt="Система экипировки">
+        <div class="gif-caption">Реальное время</div>
+      </div>
+    </div>
+    
+    <!-- Profession GIF (слева) -->
+    <div class="gif-feature">
+      <div class="gif-container left">
+        <img src="https://github.com/MizAless/TestGif/raw/main/prof.gif" alt="Система профессий">
+        <div class="gif-caption">Прогресс навыков</div>
+      </div>
+      <div class="feature-description right">
+        <h5>Разветвлённая система профессий</h5>
+        <ul>
+          <li>Прокачка навыков в зависимости от деятельности</li>
+          <li>Убийство существ → Slayer</li>
+          <li>Рубка леса → Woodcutting</li>
+          <li>Глубокая специализация персонажа</li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Farm GIF (справа) -->
+    <div class="gif-feature">
+      <div class="feature-description left">
+        <h5>Ресурсы и автоматизация</h5>
+        <ul>
+          <li>Разнообразные добываемые ресурсы</li>
+          <li>AFK и idle режимы сбора</li>
+          <li>Баланс между активным и пассивным геймплеем</li>
+          <li>Оптимизированные алгоритмы обработки</li>
+        </ul>
+      </div>
+      <div class="gif-container right">
+        <img src="https://github.com/MizAless/TestGif/raw/main/farm.gif" alt="Добыча ресурсов">
+        <div class="gif-caption">Автоматизированный сбор</div>
+      </div>
+    </div>
+    
+    <!-- Craft GIF (слева) -->
+    <div class="gif-feature">
+      <div class="gif-container left">
+        <img src="https://github.com/MizAless/TestGif/raw/main/craft.gif" alt="Система крафта">
+        <div class="gif-caption">Интерактивный крафт</div>
+      </div>
+      <div class="feature-description right">
+        <h5>Глубокая система крафта</h5>
+        <ul>
+          <li>Множество уникальных рецептов</li>
+          <li>Зависимость от уровня профессий</li>
+          <li>Качественные предметы и улучшения</li>
+          <li>Гибкая система модификаторов</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="project jam-project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>Игра с Ludum Dare 57</h4>
+      <p class="project-subtitle">Крупнейший геймджем (2025)</p>
+    </div>
+    
+    <p class="project-description">Сделал игру в одиночку за 2 дня. Тема: глубины.</p>
+    
+    <!-- Главная гифка по центру -->
+    <div class="main-screenshot">
+      <video autoplay loop muted playsinline style="width: 100%; display: block;">
+        <source src="TheLastFallIntro.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+      </video>
+      <div class="project-status">Ludum Dare 57</div>
+    </div>
+    
+    <!-- Блок с геймплеем и описанием -->
+    <div class="gif-feature">
+      <div class="gif-container left">
+        <img src="TheLastFall.gif" alt="Геймплей The Last Fall">
+        <div class="gif-caption">Игровой процесс</div>
+      </div>
+      <div class="feature-description right">
+        <p style="margin-bottom: 1.5rem; font-size: 1.2rem;">В джеме участвовало более 2000 человек. В категории Compo утвердили ~500 человек. Игра заняла 105-е место в целом, 39-е место по теме и 50-е по юмору. </p>
+        <img src="LDResults.png" alt="Результаты Ludum Dare" style="width: 100%; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+      </div>
+    </div>
+  </div>      
+  
+  <div class="project match3-project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>Match-3</h4>
+      <p class="project-subtitle">Казуальная игра с чистой архитектурой</p>
+    </div>
+    
+    <p class="project-description">
+      Игра про объединение шариков сделана с чистой архитектурой, использовался сервис локатор и входные точки, 
+      а также MVC подход. Есть фича сохранения лидерборда через файловую систему.
+    </p>
+    
+    <!-- Видео по центру -->
+    <div class="main-screenshot">
+      <video autoplay loop muted playsinline style="width: 100%; display: block;">
+        <source src="Match3.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+      </video>
+    </div>
+    
+    <!-- Ссылка на репозиторий -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://github.com/MizAless/Match3" target="_blank" 
+          style="display: inline-block; padding: 12px 24px; background: rgba(0, 204, 255, 0.1); 
+                color: #00ccff; border-radius: 30px; text-decoration: none; font-weight: 500;
+                border: 1px solid rgba(0, 204, 255, 0.3); transition: all 0.3s ease;">
+        Смотреть репозиторий
+      </a>
+    </div>
+  </div>
+
+  <!-- Проект DarkFlappy -->
+  <div class="project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>DarkFlappy</h4>
+      <p class="project-subtitle">FlappyBird с боевой системой</p>
+    </div>
+    
+    <p class="project-description">
+      FlappyBird, только с возможностью убивать врагов
+    </p>
+    
+    <!-- GIF по центру -->
+    <div class="main-screenshot">
+      <img src="https://github.com/MizAless/TestGif/raw/main/flappy.gif" alt="Геймплей DarkFlappy">
+    </div>
+    
+    <!-- Ссылка на репозиторий -->
+    <div style="text-align: center; margin-top: 2rem; margin-bottom: 2rem;">
+      <a href="https://github.com/MizAless/IJuniorFlappyTerminator" target="_blank" 
+        style="display: inline-block; padding: 12px 24px; background: rgba(255, 153, 0, 0.1); 
+                color: #ff9900; border-radius: 30px; text-decoration: none; font-weight: 500;
+                border: 1px solid rgba(255, 153, 0, 0.3); transition: all 0.3s ease;">
+        Смотреть репозиторий
+      </a>
+    </div>
+  </div>
+
+  <div class="project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>KillFest</h4>
+      <p class="project-subtitle">Шутер для GameJam</p>
+    </div>
+    
+    <p class="project-description">
+      Шутер, сделанный в течение геймджема с ограничением в 300 строк кода. 
+      Геймджем состоялся по инициативе участника творческой мастерской Романа Сакутина.
+    </p>
+    
+    <!-- YouTube трейлер -->
+    <div class="video-container" style="margin: 3rem auto; max-width: 1000px;">
+      <iframe width="100%" height="560" src="https://www.youtube.com/embed/DdJbpqrDZkc" 
+              frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);"></iframe>
+    </div>
+    
+    <!-- Автоматический слайдер -->
+    <div class="slider-container" style="position: relative; max-width: 1200px; margin: 3rem auto; overflow: hidden;">
+      <div class="slider-track" style="display: flex; transition: transform 0.5s ease;">
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="https://github.com/user-attachments/assets/411b2708-0383-4592-8b92-e630bb96e2e1" 
+              alt="Скриншот KillFest 1" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="https://github.com/user-attachments/assets/ce9b43c6-647d-4989-be33-e6634825f9f5" 
+              alt="Скриншот KillFest 2" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="https://github.com/user-attachments/assets/549e719c-ec43-45cf-90dc-5fe5203853ce" 
+              alt="Скриншот KillFest 3" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ссылка на игру -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://mizaless.itch.io/killfest" target="_blank" 
+        style="display: inline-block; padding: 14px 28px; background: rgba(255, 50, 50, 0.1); 
+                color: #ff3232; border-radius: 30px; text-decoration: none; font-weight: 500;
+                border: 1px solid rgba(255, 50, 50, 0.3); transition: all 0.3s ease;
+                font-size: 1.1rem;">
+        Играть на itch.io
+      </a>
+    </div>
+  </div>
+
+  <div class="project">
+    <div class="project-header">
+      <h4>Игра про Илона Маска на YandexGames</h4>
+    </div>
+
+    <p class="project-description">
+      Кликер выложенный на Яндекс Игры. Игра сделана так, чтобы её можно было легко загрузить на другие платформы (VK, CrazyGames и т.д.)
+    </p>
+
+    <div class="main-screenshot">
+      <img src="Elon.png" alt="Скриншот игры про Илоан Маска">
+    </div>
+  </div>
+
+  <div class="project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>Механика из игры League of Legends</h4>
+      <p class="project-subtitle"><em>В League of Legends, персонаж Draven умеет метать топоры и подбирать их. Механика была повторена в жанре 3d action shooter.</em></p>
+    </div>
+
+    <div class="feature-container" style="display: flex; align-items: center; gap: 30px; margin: 3rem 0;">
+      <!-- Основное видео слева -->
+      <div class="main-video" style="flex: 2; min-width: 0;">
+        <video autoplay loop muted playsinline style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+          <source src="Draven.mp4" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+      </div>
+      
+      <!-- Блок с дополнительным видео справа -->
+      <div class="secondary-video" style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 15px;">
+        <video autoplay loop muted playsinline style="width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+          <source src="Skill.mp4" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+        <p style="text-align: center; color: #aaa; font-size: 0.9rem; margin-top: 0;">
+          Дрейвен метает топоры в League of Legends
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>Комбо система</h4>
+      <p class="project-subtitle">3rdPersonAction</p>
+    </div>
+    
+    <p class="project-description">
+      Комбо система, которая поддерживает создание разных комбо с помощью создания атак через объекты Unity.
+    </p>
+    
+    <!-- Две гифки рядом -->
+    <div class="gif-pair" style="display: flex; gap: 30px; margin: 3rem 0;">
+      <div class="gif-container" style="flex: 1; min-width: 0;">
+        <img src="UIAttacks.gif" alt="Интерфейс создания атак" 
+            style="width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+      </div>
+      <div class="gif-container" style="flex: 1; min-width: 0;">
+        <img src="AttackCombo.gif" alt="Пример комбо атак" 
+            style="width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+      </div>
+    </div>
+    
+    <!-- Ссылка на репозиторий -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://github.com/MizAless/AttackSystem" target="_blank" 
+        style="display: inline-block; padding: 14px 28px; background: rgba(200, 160, 0, 0.1); 
+                color: #c8a000; border-radius: 30px; text-decoration: none; font-weight: 500;
+                border: 1px solid rgba(200, 160, 0, 0.3); transition: all 0.3s ease;
+                font-size: 1.1rem;">
+        Смотреть репозиторий
+      </a>
+    </div>
+  </div>
+
+  <div class="project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>Piggy Love</h4>
+      <p class="project-subtitle">Головоломка</p>
+    </div>
+    
+    <p class="project-description">
+      Игра выложена на Яндекс Игры. Проходи уровни, решая разные задачи, стреляя в свинок из лука и влюбляя их друг в друга.
+    </p>
+    
+    <!-- Автоматический слайдер -->
+    <div class="slider-container" style="position: relative; max-width: 1200px; margin: 3rem auto; overflow: hidden;">
+      <div class="slider-track" style="display: flex; transition: transform 0.5s ease;">
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="Piggy1.png" alt="Piggy Love - Игровой процесс" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="Piggy2.png" alt="Piggy Love - Разные уровни" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="Piggy3.png" alt="Piggy Love - Механика стрельбы" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="Piggy4.png" alt="Piggy Love - Уровни сложности" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>Игра "FireCat" с Siberian GameJam</h4>
+      <p class="project-subtitle">Шутер с видом сверху | Тема: безумный левелап</p>
+    </div>
+    
+    <p class="project-description">
+      Пройди всю игру быстро прокачивая навыки кота, и убивая всех врагов на пути.
+    </p>
+
+    <p class="project-description">
+      Игра заняла 4-е место из 20.
+    </p>
+    
+    <!-- Автоматический слайдер -->
+    <div class="slider-container" style="position: relative; max-width: 1200px; margin: 3rem auto; overflow: hidden;">
+      <div class="slider-track" style="display: flex; transition: transform 0.5s ease;">
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="fireCat1.png" alt="FireCat - Игровой процесс" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="fireCat2.png" alt="FireCat - Прокачка навыков" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+        <div class="slide" style="min-width: 100%; padding: 0 10px;">
+          <img src="fireCat3.png" alt="FireCat - Боевая система" style="width: 100%; height: 500px; object-fit: contain; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ссылка на игру -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://evohox.itch.io/firecat" target="_blank" 
+        style="display: inline-block; padding: 14px 28px; background: rgba(255, 69, 0, 0.1); 
+                color: #ff4500; border-radius: 30px; text-decoration: none; font-weight: 500;
+                border: 1px solid rgba(255, 69, 0, 0.3); transition: all 0.3s ease;
+                font-size: 1.1rem;">
+        Играть на itch.io
+      </a>
+    </div>
+  </div>
+
+  <div class="project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>Coin Sort</h4>
+      <p class="project-subtitle">Казуальная игра</p>
+    </div>
+    
+    <p class="project-description">
+      Сортируйте монетки, повышайте уровень и проводите время весело, тренируя своё внимание.
+    </p>
+
+    <!-- Автопроигрывающееся видео -->
+    <div class="video-container" style="margin: 3rem auto; max-width: 800px;">
+      <video autoplay loop muted playsinline style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <source src="CoinSort.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+      </video>
+    </div>
+    
+    <!-- Два скриншота горизонтально -->
+    <div class="screenshots-container" style="display: flex; gap: 30px; margin: 3rem auto; max-width: 1200px;">
+      <div style="flex: 1;">
+        <img src="CoinSort1.png" alt="Coin Sort - Игровой процесс" 
+            style="width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+      </div>
+      <div style="flex: 1;">
+        <img src="CoinSort2.png" alt="Coin Sort - Уровни сложности" 
+            style="width: 100%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4);">
+      </div>
+    </div>
+    
+    <!-- Ссылка на репозиторий -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://github.com/MizAless/CoinSort" target="_blank" 
+        style="display: inline-block; padding: 14px 28px; background: rgba(255, 215, 0, 0.1); 
+                color: #ffd700; border-radius: 30px; text-decoration: none; font-weight: 500;
+                border: 1px solid rgba(255, 215, 0, 0.3); transition: all 0.3s ease;
+                font-size: 1.1rem;">
+        Смотреть репозиторий
+      </a>
+    </div>
+  </div>
+
+  <div class="project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>Игра для детей: башня из кубиков</h4>
+      <p class="project-subtitle">Чистая архитектура с Zenject</p>
+    </div>
+    
+    <p class="project-description">
+      Детская игра с построением башни из кубиков, реализованная на чистой архитектуре 
+      с использованием Zenject для управления зависимостями.
+    </p>
+    
+    <!-- Гифка по центру -->
+    <div class="main-screenshot" style="margin: 3rem auto; max-width: 800px;">
+      <img src="cubes-game.gif" alt="Геймплей игры с кубиками" 
+          style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+    </div>
+    
+    <!-- Ссылка на репозиторий -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="https://github.com/MizAless/Cubes" target="_blank" 
+        style="display: inline-block; padding: 14px 28px; background: rgba(100, 200, 255, 0.1); 
+                color: #64c8ff; border-radius: 30px; text-decoration: none; font-weight: 500;
+                border: 1px solid rgba(100, 200, 255, 0.3); transition: all 0.3s ease;
+                font-size: 1.1rem;">
+        Смотреть репозиторий
+      </a>
+    </div>
+  </div>
+
+  <div class="project" style="margin-top: 8rem;">
+    <div class="project-header">
+      <h4>UI в стиле Doom</h4>
+      <p class="project-subtitle">Адаптивный интерфейс с анимациями</p>
+    </div>
+    
+    <p class="project-description">
+      Была проделана работа с адаптивной версткой интерфейса, анимациями и микшированием звуков.
+    </p>
+    
+    <!-- Гифка по центру -->
+    <div class="main-screenshot" style="margin: 3rem auto; max-width: 1000px;">
+      <img src="DoomUI.gif" alt="Демонстрация интерфейса в стиле Doom" 
+          style="width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2); border: 1px solid rgba(255, 50, 50, 0.3);">
+    </div>
+    
+  </div>
+</section>
+<section class="reveal" style="background: rgba(20, 20, 30, 0.8); padding: 4rem 2rem; margin-top: 8rem; border-top: 1px solid rgba(255,255,255,0.1);">
+  <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+    <h3 style="color: #00ccff; font-family: 'Orbitron', sans-serif; font-size: 2rem; margin-bottom: 2rem;">Контакты</h3>
+    
+    <div style="display: inline-block; margin-top: 1.5rem;">
+      <a href="https://t.me/mizaless" target="_blank" 
+         style="display: flex; align-items: center; gap: 10px; padding: 12px 24px; 
+                background: rgba(0, 160, 220, 0.1); color: #00a0dc; border-radius: 30px; 
+                text-decoration: none; font-weight: 500; border: 1px solid rgba(0, 160, 220, 0.3); 
+                transition: all 0.3s ease;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 0C5.373 0 0 5.373 0 12C0 18.627 5.373 24 12 24C18.627 24 24 18.627 24 12C24 5.373 18.627 0 12 0ZM18.115 8.309L16.591 17.875C16.465 18.607 15.922 18.79 15.313 18.45L11.873 15.93L10.197 17.508C9.977 17.728 9.796 17.91 9.373 17.91L9.667 14.39L16.227 8.781C16.553 8.496 16.161 8.338 15.737 8.623L7.858 13.482L4.427 12.367C3.713 12.14 3.695 11.528 4.574 11.166L17.74 6.166C18.341 5.93 18.876 6.309 18.115 8.309Z" fill="#00a0dc"/>
+        </svg>
+        Написать в Telegram
+      </a>
+    </div>
+    
+    <p style="color: #aaa; margin-top: 3rem; font-size: 0.9rem;">
+      Алексей Пивоваров
+    </p>
+  </div>
+</section>
+
+
+  <script>
+    // Функция reveal остается без изменений
+    function reveal() {
+      const reveals = document.querySelectorAll('.reveal, .reveal-right');
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 100;
+
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        }
+      }
+    }
+
+    window.addEventListener("scroll", reveal);
+    window.addEventListener("load", reveal);
+
+    // Улучшенный скрипт для всех слайдеров
+    document.addEventListener('DOMContentLoaded', function() {
+      const allSliders = document.querySelectorAll('.slider-container');
+      
+      allSliders.forEach(slider => {
+        const track = slider.querySelector('.slider-track');
+        const slides = slider.querySelectorAll('.slide');
+        let currentIndex = 0;
+        
+        // Клонируем первый слайд для бесконечной прокрутки
+        const firstClone = slides[0].cloneNode(true);
+        track.appendChild(firstClone);
+        
+        function nextSlide() {
+          currentIndex++;
+          track.style.transition = 'transform 0.5s ease';
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+          
+          if (currentIndex >= slides.length) {
+            setTimeout(() => {
+              track.style.transition = 'none';
+              currentIndex = 0;
+              track.style.transform = 'translateX(0)';
+            }, 500);
+          }
+        }
+        
+        // Запускаем автопрокрутку
+        const intervalId = setInterval(nextSlide, 3000);
+        
+        // Пауза при наведении
+        slider.addEventListener('mouseenter', () => {
+          clearInterval(intervalId);
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+          intervalId = setInterval(nextSlide, 3000);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
